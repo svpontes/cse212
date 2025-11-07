@@ -1,5 +1,7 @@
-﻿public class SimpleQueue {
-    public static void Run() {
+﻿public class SimpleQueue
+{
+    public static void Run()
+    {
         // Test Cases
 
         // Test 1
@@ -37,24 +39,28 @@
         // Expected Result: An exception should be raised
         Console.WriteLine("Test 3");
         queue = new SimpleQueue();
-        try {
+        try
+        {
             queue.Dequeue();
             Console.WriteLine("Oops ... This shouldn't have worked.");
         }
-        catch (IndexOutOfRangeException) {
+        catch (IndexOutOfRangeException)
+        {
             Console.WriteLine("I got the exception as expected.");
         }
         // Defect(s) Found: 
     }
 
-    private readonly List<int> _queue = new();
+    private readonly List<int> _queue = new List<int>();//or simplified List<int>.List();
 
     /// <summary>
     /// Enqueue the value provided into the queue
     /// </summary>
     /// <param name="value">Integer value to add to the queue</param>
-    private void Enqueue(int value) {
+    private void Enqueue(int value)
+    {
         _queue.Insert(0, value);
+
     }
 
     /// <summary>
@@ -62,12 +68,13 @@
     /// </summary>
     /// <exception cref="IndexOutOfRangeException">If queue is empty</exception>
     /// <returns>First integer in the queue</returns>
-    private int Dequeue() {
+    private int Dequeue()
+    {
         if (_queue.Count <= 0)
             throw new IndexOutOfRangeException();
 
-        var value = _queue[1];
-        _queue.RemoveAt(1);
+        var value = _queue[_queue.Count - 1];
+        _queue.RemoveAt(_queue.Count - 1);
         return value;
     }
 }
