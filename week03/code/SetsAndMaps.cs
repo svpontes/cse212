@@ -107,17 +107,17 @@ public class SetsAndMaps : ISetsAndMaps
     {
         const string uri = "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_day.geojson";
 
-        // Note: Assuming FeatureCollection, Feature, and Properties classes are defined elsewhere.
+        
         using var client = new HttpClient();
         using var getRequestMessage = new HttpRequestMessage(HttpMethod.Get, uri);
 
-        // Handling synchronous send and stream read as in the original code
+        
         using var jsonStream = client.Send(getRequestMessage).Content.ReadAsStream();
         using var reader = new StreamReader(jsonStream);
         var json = reader.ReadToEnd();
         var options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
 
-        // Requires FeatureCollection class definition
+        
         var featureCollection = JsonSerializer.Deserialize<FeatureCollection>(json, options);
 
         var summaryList = new List<string>();
@@ -129,8 +129,7 @@ public class SetsAndMaps : ISetsAndMaps
                 var properties = feature.Properties;
                 if (properties == null) continue;
 
-                // Removed '?.' from properties.Mag?.ToString() assuming Mag is 'double' and cannot be null
-                // in the Properties class definition (which is correct for the USGS API).
+                
                 var magText = properties.Mag.ToString();
 
                 var summary = $"{properties.Place} - Mag {magText}";
@@ -138,7 +137,7 @@ public class SetsAndMaps : ISetsAndMaps
             }
         }
 
-        // CORREÇÃO: Ponto e vírgula ausente.
+       
         return summaryList.ToArray();
     }
 }
