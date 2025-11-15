@@ -10,7 +10,7 @@ public class FindPairsTests
     public void FindPairs_TwoPairs()
     {
         var actual = SetsAndMaps.FindPairs(["am", "at", "ma", "if", "fi"]);
-        var expected = new[] { "ma & am", "fi & if" };
+        var expected = new[] {"ma & am", "fi & if"};
 
         Assert.AreEqual(expected.Length, actual.Length);
         Assert.AreEqual(Canonicalize(expected), Canonicalize(actual));
@@ -195,13 +195,12 @@ public class IsAnagramTests
         // Calibrate baseline CPU performance
         double CalibrateCpuSpeed()
         {
-            var sw = Stopwatch.StartNew();
+            var sw = Stopwatch.StartNew(); 
             long sum = 0;
             for (int i = 0; i < 400_000_000; i++) sum += i;
             sw.Stop();
             return sw.Elapsed.TotalMilliseconds;
         }
-
         double baseline = CalibrateCpuSpeed();
 
         // Create test data

@@ -30,9 +30,54 @@ public class Maze
     /// Check to see if you can move left.  If you can, then move.  If you
     /// can't move, throw an InvalidOperationException with the message "Can't go that way!".
     /// </summary>
+    /// 
+
+    // Index constants for the boolean array: [left, right, up, down]
+    private const int LEFT_INDEX = 0;
+    private const int RIGHT_INDEX = 1;
+    private const int UP_INDEX = 2;
+    private const int DOWN_INDEX = 3;
+    private const string WALL_MESSAGE = "Can't go that way!";
+
+    //check location boudary 
+    private void moving_X_Y(int wallIndex, int currentLocalX, int currentLocalY)
+    {
+        // 1. Get wall status for the current location.
+        // Assumes current location exists, as per problem context.
+        var walls = _mazeMap[(_currX, _currY)];
+
+        // 2. Check the wall status for the intended direction.
+        if (walls[wallIndex])
+        {
+            int newLocalX = _currX + currentLocalX;
+            int newLocalY = _currY + currentLocalY;
+
+            // 3. Boundary Check: Ensure the destination cell exists in the map.
+            // This prevents KeyNotFoundException (e.g., trying to move to (2, 0)).
+            if (_mazeMap.ContainsKey((newLocalX, newLocalY)))
+            {
+                // Destination is valid and mapped, update coordinates.
+                _currX = newLocalX;
+                _currY = newLocalY;
+            }
+            else
+            {
+                // Path was open, but hit the boundary/unmapped area.
+                throw new InvalidOperationException(WALL_MESSAGE);
+            }
+        }
+        else
+        {
+            // Hit an explicit wall (wall value is false).
+            throw new InvalidOperationException(WALL_MESSAGE);
+        }
+    }
     public void MoveLeft()
     {
-        // FILL IN CODE
+        {
+            // coorednates: X-1, Y+0
+            moving_X_Y(LEFT_INDEX, -1, 0);
+        }
     }
 
     /// <summary>
@@ -41,7 +86,8 @@ public class Maze
     /// </summary>
     public void MoveRight()
     {
-        // FILL IN CODE
+        // coorednates: X+1, Y+0
+        moving_X_Y(RIGHT_INDEX, 1, 0);
     }
 
     /// <summary>
@@ -50,7 +96,8 @@ public class Maze
     /// </summary>
     public void MoveUp()
     {
-        // FILL IN CODE
+        // coorednates: X+0, Y-1
+        moving_X_Y(UP_INDEX, 0, -1);
     }
 
     /// <summary>
@@ -59,7 +106,8 @@ public class Maze
     /// </summary>
     public void MoveDown()
     {
-        // FILL IN CODE
+        // coorednates: X+0, Y+1
+        moving_X_Y(DOWN_INDEX, 0, 1);
     }
 
     public string GetStatus()
