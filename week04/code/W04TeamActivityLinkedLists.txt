@@ -1,0 +1,83 @@
+W04 Team Activity: Linked Lists
+
+Review of Preparation Learning Activities
+
+What is the difference between a linked list and a dynamic array?
+A linked list is a data structure where each element (node) contains a value and a reference to the next (and possibly previous) node. The elements are stored separately in memory and connected through pointers.
+A dynamic array, on the other hand, stores its elements in a contiguous block of memory. When it grows beyond capacity, it must allocate a new larger block and copy the existing elements.
+
+What is one of the strengths of a linked list?
+One strength of a linked list is that inserting or removing elements at the beginning, middle, or end of the list can be done efficiently without shifting other elements—typically in constant time, as long as the position is known.
+
+What is one of the drawbacks of a linked list?
+A major drawback is that accessing an element by index is slow because the list must be traversed node by node. This means linked lists have linear-time access (O(n)), unlike dynamic arrays which provide constant-time indexing.
+
+Review of Preparation Learning Activities
+🔹 Question 1: What is the difference between a linked list and a dynamic array?
+
+A linked list stores elements as separate nodes, each containing a value and a reference (pointer) to the next node.
+
+A dynamic array stores all elements in a single, continuous block of memory.
+
+When a dynamic array runs out of space, it must allocate a larger block and copy existing elements, while a linked list does not need contiguous memory.
+
+🔹 Question 2: What is one of the strengths of a linked list?
+
+Linked lists allow fast insertion and deletion of elements, especially when done at the beginning, end, or when a pointer to the position is available.
+
+These operations can generally be done in O(1) time, without shifting elements.
+
+🔹 Question 3: What is one of the drawbacks of a linked list?
+
+Accessing a value by index is slow, because the list must be traversed node by node from the beginning.
+
+This means linked lists have O(n) time complexity for random access, unlike dynamic arrays which provide O(1) indexing.
+
+Slides:
+
+Slide 1 — Linked List vs. Dynamic Array
+
+Key Comparison
+
+Linked List:
+
+Elements stored in separate nodes
+
+Nodes linked with pointers
+
+Memory does not need to be continuous
+
+Dynamic Array:
+
+Elements stored in a single continuous block
+
+May need to resize and copy data when full
+
+🎤 Presenter Note:
+“Dynamic arrays give fast indexing, while linked lists focus on flexibility for insertions and deletions.”
+
+📌 Slide 2 — Strength of a Linked List
+
+Main Advantage
+
+Efficient insertions and deletions
+
+No need to shift elements
+
+Often operates in O(1) time if the node reference is known
+
+🎤 Presenter Note:
+“A linked list shines when we frequently modify the structure, especially in the middle or at the beginning.”
+
+📌 Slide 3 — Drawback of a Linked List
+
+Main Limitation
+
+Slow access by index
+
+Must traverse nodes one by one
+
+Random access takes O(n) time
+
+🎤 Presenter Note:
+“This is why linked lists are not ideal when we need fast indexed access or frequent lookups.”
