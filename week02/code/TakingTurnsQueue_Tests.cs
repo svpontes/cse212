@@ -28,7 +28,7 @@ public class TakingTurnsQueueTests
         int i = 0;
         while (players.Length > 0)
         {
-            if (i >= expectedResult.Length)
+            if (i >= expectedResult.Length)//era >
             {
                 Assert.Fail("Queue should have ran out of items by now.");
             }
@@ -37,8 +37,9 @@ public class TakingTurnsQueueTests
             Assert.AreEqual(expectedResult[i].Name, person.Name);
             i++;
         }
+    
     }
-
+    
     [TestMethod]
     // Scenario: Create a queue with the following people and turns: Bob (2), Tim (5), Sue (3)
     // After running 5 times, add George with 3 turns.  Run until the queue is empty.

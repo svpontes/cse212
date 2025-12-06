@@ -49,6 +49,21 @@ public class Maze
     /// Helper function to determine if the (x,y) position is at 
     /// the end of the maze.
     /// </summary>
+
+    public List<string> SolveMaze()
+    {
+        // List to hold all valid solutions
+        List<string> results = new List<string>();
+
+        // Current working path (starts empty)
+        List<(int, int)> currPath = new List<(int, int)>();
+
+        // Begin recursion from the starting square (0,0)
+        Explore(0, 0, currPath, results);
+
+        return results;
+    }
+
     public bool IsEnd(int x, int y)
     {
         return Data[y * Height + x] == 2;
@@ -60,6 +75,37 @@ public class Maze
     /// place to move given the size of the maze, the content of the maze,
     /// and the current path already traversed.
     /// </summary>
+    /// 
+
+    private void Explore(int x, int y, List<(int, int)> currPath, List<string> results)
+    {
+        // If this is not a legal move, stop exploring this path.
+        if (!IsValidMove(currPath, x, y))
+            return;
+
+        // Record that we are stepping into this square.
+        currPath.Add((x, y));
+
+        // If this square is the end, we found a full path.
+        if (IsEnd(x, y))
+        {
+            results.Add(currPath.AsString());
+
+            // Remove before backtracking.
+            currPath.RemoveAt(currPath.Count - 1);
+            return;
+        }
+
+        // Explore in all 4 directions recursively
+        Explore(x + 1, y, currPath, results); // right
+        Explore(x - 1, y, currPath, results); // left
+        Explore(x, y + 1, currPath, results); // down
+        Explore(x, y - 1, currPath, results); // up
+
+        // Remove the last square before returning (backtracking)
+        currPath.RemoveAt(currPath.Count - 1);
+    }
+
     public bool IsValidMove(List<ValueTuple<int, int>> currPath, int x, int y)
     {
         // Can't go outside of the maze boundary (assume maze is a square)
